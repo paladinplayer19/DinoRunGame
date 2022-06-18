@@ -145,7 +145,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatingObject.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="Cactus.cpp" />
+    <ClCompile Include="Cloud.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Meat.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimatingObject.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Bird.h" />
+    <ClInclude Include="Cactus.h" />
+    <ClInclude Include="Cloud.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Meat.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
