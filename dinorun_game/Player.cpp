@@ -11,6 +11,10 @@ Player::Player()
 {
 }
 
+void Player::Update(sf::Time frameTime)
+{
+}
+
 void Player::Jump()
 {
 }

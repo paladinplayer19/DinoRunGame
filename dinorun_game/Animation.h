@@ -10,7 +10,7 @@ public:
 	void SetSprite(sf::Sprite* newSprite);
 	void SetPlayBackSpeed(float newPlayBackSpeed);
 	void SetLoop(bool newLoop);
-	void GetPlaying();
+	bool GetPlaying();
 	void Update(sf::Time frameTime);
 	void Play();
 	void Pause();

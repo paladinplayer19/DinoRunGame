@@ -6,7 +6,7 @@ class GameObject
 public:
 	GameObject();
 
-	void Update();//////////// sort out virtual function stuff
+	virtual void Update(sf::Time frameTime);
 	void Draw();
 	void ChangePos();
 

@@ -7,6 +7,7 @@ class Player : public AnimatingObject
 public:
 	Player();
 
+	void Update(sf::Time frameTime) override;
 	void Jump();
 	void Crouch();
 	bool isCollidingObstacle();

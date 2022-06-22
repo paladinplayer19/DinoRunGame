@@ -1,9 +1,12 @@
 #include "AnimatingObject.h"
 
 AnimatingObject::AnimatingObject()
-	: sprite()
+	: GameObject()
+	, animations()
+	, currentAnimation(nullptr)
+	, sprite()
 	, spriteTexture()
-	, speed()
+	, speed(10)
 	, position()
 	, collider()
 {
@@ -11,25 +14,52 @@ AnimatingObject::AnimatingObject()
 
 Animation* AnimatingObject::CreateAnimation(std::string name)
 {
-	return nullptr;
+	Animation* newAnimation = &animations[name];
+
+	newAnimation->SetSprite(&sprite);
+	return newAnimation;
+	
 }
 
 void AnimatingObject::Play()
 {
+	if (currentAnimation)
+	{
+		currentAnimation->Play();
+	}
 }
 
 void AnimatingObject::Play(std::string newAnimation)
 {
+	Stop();
+
+	currentAnimation = &animations[newAnimation];
+
+	Play();
 }
 
 void AnimatingObject::Pause()
 {
+	if (currentAnimation)
+	{
+		currentAnimation->Pause();
+	}
 }
 
 void AnimatingObject::Stop()
 {
+	if (currentAnimation)
+	{
+		currentAnimation->Stop();
+	}
 }
 
 void AnimatingObject::Update(sf::Time frameTime)
 {
+	GameObject::Update(frameTime);
+
+	if (currentAnimation)
+	{
+		currentAnimation->Update(frameTime);
+	}
 }

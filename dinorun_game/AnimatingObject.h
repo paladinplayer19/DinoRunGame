@@ -12,9 +12,11 @@ public:
 	void Play(std::string newAnimation);
 	void Pause();
 	void Stop();
-	void Update(sf::Time frameTime);
+	virtual void Update(sf::Time frameTime) override;
 
-
+private:
+	std::map<std::string, Animation> animations;
+	Animation* currentAnimation;
 protected:
 	sf::Sprite sprite;
 	sf::Texture spriteTexture;
