@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player()
-	: score()
+	: score(0)
 	, jumpBuffer()
 	, hitBuffer()
 	, itemBuffer()
@@ -17,6 +17,7 @@ void Player::Update(sf::Time frameTime)
 
 void Player::Jump()
 {
+	
 }
 
 void Player::Crouch()

@@ -9,7 +9,7 @@ public:
 
 	void Update(sf::Time frameTime) override;
 	void Jump();
-	void Crouch();
+	void Crouch();	
 	bool isCollidingObstacle();
     bool isCollidingMeat();
 

@@ -7,12 +7,14 @@ public:
 	GameObject();
 
 	virtual void Update(sf::Time frameTime);
-	void Draw();
-	void ChangePos();
+	void Draw(sf::RenderTarget& target);
+	void ChangePos(sf::Vector2f newPos);
+	void SetVelocity(sf::Vector2f newVel);
+
+	sf::Vector2f GetPosition();
 
 protected:
 	sf::Sprite sprite;
-	sf::Texture spriteTexture;
 	float speed;
 	sf::Vector2f position;
 	sf::FloatRect collider;

@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "Cloud.h"
+
 class Game
 {
 public:
@@ -10,11 +12,14 @@ public:
 	void Update();
 	void Draw();
 	void DisplayGameOver();
-	void SetupGame();
 	void SpawnObstacle();
 	void Reset();
 
 private:
+	void SetupGame();
+
+	sf::Clock gameClock;
+	sf::RenderWindow window;
 	sf::Music backgroundMusic;
 	bool hasCollided;
 	std::vector<Cloud*> cloudVector;
