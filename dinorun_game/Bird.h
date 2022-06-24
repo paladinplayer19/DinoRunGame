@@ -3,8 +3,19 @@
 class Bird : public Obstacle
 {
 public:
-	Bird();
+	Bird(sf::Vector2f newScreenSize);
+	virtual void Update(sf::Time deltaTime) override;
+
 
 private:
+	void Reset();
+
+	sf::Vector2f screenSize;
+	static sf::Texture* birdTexture;
+	sf::Vector2f newPosition = sf::Vector2f();
+	sf::Vector2f currentPosition = sf::Vector2f();
+	sf::Vector2f velocity = sf::Vector2f();
+	float birdFrequency;
+	sf::Time timeSinceBird;
 };
 

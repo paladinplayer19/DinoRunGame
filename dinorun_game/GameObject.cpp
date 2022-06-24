@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include <iostream>
+
 GameObject::GameObject()
 	: sprite()
 	, speed(10)
@@ -11,7 +12,6 @@ GameObject::GameObject()
 
 void GameObject::Update(sf::Time frameTime)
 {
-	
 	ChangePos(position + velocity * frameTime.asSeconds());
 }
 

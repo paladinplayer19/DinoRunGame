@@ -2,18 +2,25 @@
 #include "AnimatingObject.h"
 #include <SFML/Audio.hpp>
 
+class Game;
+
 class Player : public AnimatingObject
 {
 public:
-	Player();
+	Player(Game* newGame, sf::Vector2f newScreenSize);
 
-	void Update(sf::Time frameTime) override;
-	void Jump();
+	virtual void Update(sf::Time frameTime) override;
+	void Jump(sf::Time frameTime);
 	void Crouch();	
 	bool isCollidingObstacle();
     bool isCollidingMeat();
 
 private:
+	float gravity;
+	static sf::Texture* playerRunning1;
+	static sf::Texture* playerRunning2;
+	static sf::Texture* playerCrouch1;
+	static sf::Texture* playerCrouch2;
 	int score;
 	sf::SoundBuffer jumpBuffer;
 	sf::SoundBuffer hitBuffer;
@@ -21,6 +28,8 @@ private:
 	sf::Sound jumpSound;
 	sf::Sound hitSound;
 	sf::Sound itemSound;
+	sf::Vector2f screenSize;
+	int JUMP_SPEED;
 
 };
 

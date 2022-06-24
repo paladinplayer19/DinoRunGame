@@ -3,7 +3,9 @@
 class Cactus : public Obstacle
 {
 public:
-	Cactus();
+	Cactus(sf::Vector2f newScreenSize);
+
 private:
+	sf::Vector2f screenSize;
 };
 

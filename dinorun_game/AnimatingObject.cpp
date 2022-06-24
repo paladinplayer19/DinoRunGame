@@ -1,11 +1,9 @@
 #include "AnimatingObject.h"
-
+#include <iostream>
 AnimatingObject::AnimatingObject()
 	: GameObject()
 	, animations()
 	, currentAnimation(nullptr)
-	, sprite()
-	, spriteTexture()
 	, speed(10)
 	, position()
 	, collider()
@@ -58,6 +56,7 @@ void AnimatingObject::Update(sf::Time frameTime)
 {
 	GameObject::Update(frameTime);
 
+	
 	if (currentAnimation)
 	{
 		currentAnimation->Update(frameTime);

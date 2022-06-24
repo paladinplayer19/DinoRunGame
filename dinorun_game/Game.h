@@ -1,6 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Cloud.h"
+#include "Player.h"
+#include "Floor.h"
+#include "Bird.h"
+#include "Cactus.h"
 
 class Game
 {
@@ -19,6 +23,10 @@ private:
 	void SetupGame();
 
 	sf::Clock gameClock;
+	Player player;
+	Floor floor;
+	std::vector<Bird*> birdVector;
+	std::vector<Cactus*> cactusVector;
 	sf::RenderWindow window;
 	sf::Music backgroundMusic;
 	bool hasCollided;

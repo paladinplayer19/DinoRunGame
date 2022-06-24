@@ -2,14 +2,16 @@
 #include <iostream>
 Game::Game()
 	: gameClock()
+	, player(this, sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height))
 	, window(sf::VideoMode::getDesktopMode(), "Dino Run", sf::Style::Titlebar | sf::Style::Close)
 	, backgroundMusic()
 	, hasCollided()
 	, cloudVector()
-	, score()
+	, score(0)
 	, quitCollider()
 	, resetCollider()
-	, mousePos()
+	, mousePos(0.0f,0.0f)
+	, floor(sf::Vector2f(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height))
 {
 }
 
@@ -47,8 +49,22 @@ void Game::Update()
 {
 	sf::Time deltaTime = gameClock.restart();
 
+	player.Update(deltaTime);
 	
-	
+	floor.Update(deltaTime);
+
+	for (int i = 0; i < birdVector.size(); ++i)
+	{
+
+		birdVector[i]->Update(deltaTime);
+
+	}
+	for (int i = 0; i < cactusVector.size(); ++i)
+	{
+
+		cactusVector[i]->Update(deltaTime);
+
+	}
 
 	for (int i = 0; i < cloudVector.size(); ++i)
 	{
@@ -60,8 +76,23 @@ void Game::Update()
 
 void Game::Draw()
 {
+	
+
 	window.clear();
     
+	player.Draw(window);
+
+	for (int i = 0; i < birdVector.size(); ++i)
+	{
+		birdVector[i]->Draw(window);
+	}
+	for (int i = 0; i < cactusVector.size(); ++i)
+	{
+		cactusVector[i]->Draw(window);
+	}
+
+	floor.Draw(window);
+
 	for (int i = 0; i < cloudVector.size(); ++i)
 	{
 		cloudVector[i]->Draw(window);
@@ -77,8 +108,28 @@ void Game::DisplayGameOver()
 void Game::SetupGame()
 {
 	sf::Vector2f screenSize(window.getSize());
+	int numbObstacles = 5;
 
-	//player.SetPosition(sf::Vector2f(100, screenSize.y / 2 - 50));
+	int CHOICE = 0;
+	CHOICE = rand() % 2;
+
+	for (int i = 0; i < numbObstacles; ++i)
+	{
+
+		
+	if (CHOICE == 1)
+	{
+		// spawn bird
+		birdVector.push_back(new Bird(screenSize));
+
+	}
+	else {
+		// spawn cactus
+		cactusVector.push_back(new Cactus(screenSize));
+
+	}
+	CHOICE = rand() % 2;
+	}
 
 	int numbStars = 5;
 

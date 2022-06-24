@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Animation.h";
+#include "Animation.h"
 
 class AnimatingObject : public GameObject
 {
@@ -18,7 +18,7 @@ private:
 	std::map<std::string, Animation> animations;
 	Animation* currentAnimation;
 protected:
-	sf::Sprite sprite;
+	
 	sf::Texture spriteTexture;
 	float speed;
 	sf::Vector2f position;

@@ -11,7 +11,7 @@ Animation::Animation()
 {
 }
 
-void Animation::AddFrame(sf::Texture* newFrame)
+void Animation::AddFrame(sf::Texture* newFrame)	
 {
 	if (newFrame)
 	{
