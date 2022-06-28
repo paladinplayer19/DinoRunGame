@@ -5,6 +5,8 @@ sf::Texture* Floor::floorTexture = nullptr;
 Floor::Floor(sf::Vector2f newScreenSize)
 	: GameObject()
 	, screenSize(newScreenSize)
+	, canJump()
+	, isTouching()
 	
 {
 	if (floorTexture == nullptr)
@@ -36,17 +38,27 @@ void Floor::HandleCollision(GameObject& other)
 		return;
 	}
 
-	if (!IsColliding(other)) {
+	if (!IsColliding(other))
+	{
+		isTouching = false;
+
 		return;
 	}
 
+	isTouching = true;
 	sf::Vector2f depth = GetCollisionDepth(other);
 	sf::Vector2f absDepth = sf::Vector2f(abs(depth.x), abs(depth.y));
 	sf::Vector2f playerPosition = checkPlayer->GetPosition();
 
 	
 		
-    playerPosition.y -= absDepth.y;
+	if (isTouching)
+	{
+      playerPosition.y -= absDepth.y;
+	  canJump = true;
+	  checkPlayer->SetCanJump(canJump);
+	}
+	
 
 
 	checkPlayer->ChangePos(playerPosition);
@@ -58,6 +70,11 @@ void Floor::HandleCollision(GameObject& other)
 sf::FloatRect Floor::GetFloorCollider()
 {
 	return collider;
+}
+
+bool Floor::GetCanJump()
+{
+	return canJump;
 }
 
 

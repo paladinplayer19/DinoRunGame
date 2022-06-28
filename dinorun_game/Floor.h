@@ -8,9 +8,11 @@ public:
 	virtual void Update(sf::Time deltaTime) override;
 	void HandleCollision(GameObject& other);
 	sf::FloatRect GetFloorCollider();
+	bool GetCanJump();
 private:
 	static sf::Texture* floorTexture;
 	sf::Vector2f screenSize;
-	
+	bool canJump;
+	bool isTouching;
 };
 

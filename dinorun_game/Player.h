@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 
 class Game;
+class Floor;
 
 class Player : public AnimatingObject
 {
@@ -11,7 +12,8 @@ public:
 
 	virtual void Update(sf::Time frameTime) override;
 	void Jump(sf::Time frameTime);
-	void Crouch();	
+	void Crouch();
+	void SetCanJump(bool newCanJump);
 	
 
 private:
@@ -31,6 +33,8 @@ private:
 	sf::Sound itemSound;
 	sf::Vector2f screenSize;
 	int JUMP_SPEED;
+	bool canJump;
+	
 	
 
 };

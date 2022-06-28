@@ -18,7 +18,9 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	, hitSound()
 	, itemSound()
 	, screenSize(newScreenSize)
-	, JUMP_SPEED(-600)
+	, JUMP_SPEED(-800)
+	, canJump()
+	
 {
 	ChangePos(sf::Vector2f(10, 0.0f));
 	
@@ -82,10 +84,11 @@ void Player::Update(sf::Time frameTime)
 	
 	AnimatingObject::Update(frameTime);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && canJump == true)
 	{
 		Jump(frameTime);
 		//jumpSound.play();
+		canJump = false;
 	}
 	
 
@@ -107,6 +110,11 @@ void Player::Jump(sf::Time frameTime)
 
 void Player::Crouch()
 {
+}
+
+void Player::SetCanJump(bool newCanJump)
+{
+	canJump = newCanJump;
 }
 
 

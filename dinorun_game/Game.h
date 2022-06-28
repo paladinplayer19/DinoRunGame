@@ -22,8 +22,8 @@ private:
 	void SetupGame();
 
 	sf::Clock gameClock;
-	Player player;
 	Floor floor;
+	Player player;
 	std::vector<Bird*> birdVector;
 	std::vector<Cactus*> cactusVector;
 	sf::RenderWindow window;
