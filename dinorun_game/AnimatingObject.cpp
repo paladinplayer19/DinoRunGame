@@ -4,9 +4,8 @@ AnimatingObject::AnimatingObject()
 	: GameObject()
 	, animations()
 	, currentAnimation(nullptr)
-	, speed(10)
-	, position()
-	, collider()
+	, spriteTexture()
+	, speed(10)	
 {
 }
 

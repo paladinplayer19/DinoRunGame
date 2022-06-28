@@ -1,10 +1,11 @@
 #include "Floor.h"
-
+#include "Player.h"
 sf::Texture* Floor::floorTexture = nullptr;
 
 Floor::Floor(sf::Vector2f newScreenSize)
-	: screenSize(newScreenSize)
-	, collider()
+	: GameObject()
+	, screenSize(newScreenSize)
+	
 {
 	if (floorTexture == nullptr)
 	{
@@ -12,15 +13,51 @@ Floor::Floor(sf::Vector2f newScreenSize)
 		floorTexture->loadFromFile("Assets/Graphics/floor.png");
 	}
 	
+	
 	sprite.setTexture(*floorTexture);
 	
-
+	
+	ChangePos(sf::Vector2f(0.0f, screenSize.y - (screenSize.y / 4)));
 }
 
 void Floor::Update(sf::Time deltaTime)
 {
 	GameObject::Update(deltaTime);
-	sprite.setPosition(0.0f, screenSize.y - 400);
+	
+	
+}
+
+void Floor::HandleCollision(GameObject& other)
+{
+	// Checking if the thing is actually the player
+	Player* checkPlayer = dynamic_cast<Player*>(&other);
+
+	if (checkPlayer == nullptr) {
+		return;
+	}
+
+	if (!IsColliding(other)) {
+		return;
+	}
+
+	sf::Vector2f depth = GetCollisionDepth(other);
+	sf::Vector2f absDepth = sf::Vector2f(abs(depth.x), abs(depth.y));
+	sf::Vector2f playerPosition = checkPlayer->GetPosition();
+
+	
+		
+    playerPosition.y -= absDepth.y;
+
+
+	checkPlayer->ChangePos(playerPosition);
+		
+	
+	
+}
+
+sf::FloatRect Floor::GetFloorCollider()
+{
+	return collider;
 }
 
 

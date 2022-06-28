@@ -12,10 +12,11 @@ public:
 	virtual void Update(sf::Time frameTime) override;
 	void Jump(sf::Time frameTime);
 	void Crouch();	
-	bool isCollidingObstacle();
-    bool isCollidingMeat();
+	
 
 private:
+	
+
 	float gravity;
 	static sf::Texture* playerRunning1;
 	static sf::Texture* playerRunning2;
@@ -30,6 +31,7 @@ private:
 	sf::Sound itemSound;
 	sf::Vector2f screenSize;
 	int JUMP_SPEED;
+	
 
 };
 

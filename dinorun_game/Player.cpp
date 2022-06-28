@@ -9,7 +9,7 @@ sf::Texture* Player::playerCrouch2 = nullptr;
 
 Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	: AnimatingObject()
-	, gravity(2000)	
+	, gravity(2000)
 	, score(0)
 	, jumpBuffer()
 	, hitBuffer()
@@ -18,10 +18,10 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	, hitSound()
 	, itemSound()
 	, screenSize(newScreenSize)
-	, JUMP_SPEED(5)
+	, JUMP_SPEED(-600)
 {
-	ChangePos(sf::Vector2f(screenSize.x /2, screenSize.y /2));
-	SetVelocity(sf::Vector2f(0, 10));
+	ChangePos(sf::Vector2f(10, 0.0f));
+	
 	if (playerRunning1 == nullptr)
 	{
 		playerRunning1 = new sf::Texture();
@@ -45,6 +45,7 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	
 	sprite.setTexture(*playerRunning1);
 	
+	
 
 	Animation* run = CreateAnimation("run");
 	Animation* crouchRun = CreateAnimation("crouchRun");
@@ -62,8 +63,18 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 
 	Play("run");	
 
-
+	jumpBuffer.loadFromFile("Assets/Audio/jump.wav");
+	jumpSound.setBuffer(jumpBuffer);
 	
+	hitBuffer.loadFromFile("Assets/Audio/death.wav");
+	hitSound.setBuffer(jumpBuffer);
+	
+	itemBuffer.loadFromFile("Assets/Audio/pickup.wav");
+	itemSound.setBuffer(jumpBuffer);
+	
+
+	//hitSound.play();
+	//itemSound.play();
 }
 
 void Player::Update(sf::Time frameTime)
@@ -74,29 +85,31 @@ void Player::Update(sf::Time frameTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		Jump(frameTime);
+		//jumpSound.play();
 	}
+	
 
 	velocity.y += gravity * frameTime.asSeconds();
+	
+	
+	
 
+	
 }
 
 void Player::Jump(sf::Time frameTime)
 {
-	velocity.y -= JUMP_SPEED;
+	velocity.y = JUMP_SPEED;
 
 	Play("jump");
+	
 }
 
 void Player::Crouch()
 {
 }
 
-bool Player::isCollidingObstacle()
-{
-	return false;
-}
 
-bool Player::isCollidingMeat()
-{
-	return false;
-}
+
+
+

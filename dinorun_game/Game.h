@@ -16,7 +16,6 @@ public:
 	void Update();
 	void Draw();
 	void DisplayGameOver();
-	void SpawnObstacle();
 	void Reset();
 
 private:
@@ -28,12 +27,18 @@ private:
 	std::vector<Bird*> birdVector;
 	std::vector<Cactus*> cactusVector;
 	sf::RenderWindow window;
-	sf::Music backgroundMusic;
 	bool hasCollided;
 	std::vector<Cloud*> cloudVector;
 	int score;
 	sf::FloatRect quitCollider;
 	sf::FloatRect resetCollider;
 	sf::Vector2f mousePos;
+	sf::Sound backgroundMusic;
+	sf::SoundBuffer backgroundMusicBuffer;
+	sf::Vector2f collidetestSize;
+	sf::RectangleShape colliderRectangleTestFloor;
+	sf::Vector2f collidetestSizeplayer;
+	sf::RectangleShape colliderRectangleTestplayer;
+
 };
 
