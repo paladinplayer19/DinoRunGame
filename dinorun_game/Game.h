@@ -5,6 +5,7 @@
 #include "Floor.h"
 #include "Bird.h"
 #include "Cactus.h"
+#include "Meat.h"
 
 class Game
 {
@@ -24,6 +25,7 @@ private:
 	sf::Clock gameClock;
 	Floor floor;
 	Player player;
+	Meat meat;
 	std::vector<Bird*> birdVector;
 	std::vector<Cactus*> cactusVector;
 	sf::RenderWindow window;
@@ -39,6 +41,13 @@ private:
 	sf::RectangleShape colliderRectangleTestFloor;
 	sf::Vector2f collidetestSizeplayer;
 	sf::RectangleShape colliderRectangleTestplayer;
+	sf::Font font;
+	sf::Text text;
+	sf::Text scoreText;
+	float timePassed;
+	float speedCount;
+	bool isGameOver;
+
 
 };
 

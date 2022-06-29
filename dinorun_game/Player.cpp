@@ -12,18 +12,14 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	, gravity(2000)
 	, score(0)
 	, jumpBuffer()
-	, hitBuffer()
-	, itemBuffer()
 	, jumpSound()
-	, hitSound()
-	, itemSound()
 	, screenSize(newScreenSize)
 	, JUMP_SPEED(-800)
 	, canJump()
-	
+	, hasPressedDown(false)
 {
-	ChangePos(sf::Vector2f(10, 0.0f));
-	
+	ChangePos(sf::Vector2f(100, 100.0f));
+
 	if (playerRunning1 == nullptr)
 	{
 		playerRunning1 = new sf::Texture();
@@ -44,77 +40,88 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 		playerCrouch2 = new sf::Texture();
 		playerCrouch2->loadFromFile("Assets/Graphics/dino-crouch-2.png");
 	}
-	
-	sprite.setTexture(*playerRunning1);
-	
-	
+
+
+
 
 	Animation* run = CreateAnimation("run");
 	Animation* crouchRun = CreateAnimation("crouchRun");
 
 	run->AddFrame(playerRunning1);
 	run->AddFrame(playerRunning2);
-	
+
 	crouchRun->AddFrame(playerCrouch1);
 	crouchRun->AddFrame(playerCrouch2);
 
 	run->SetPlayBackSpeed(10);
 	run->SetLoop(true);
+
 	crouchRun->SetPlayBackSpeed(10);
 	crouchRun->SetLoop(false);
 
-	Play("run");	
+
+
+	Play("run");
 
 	jumpBuffer.loadFromFile("Assets/Audio/jump.wav");
 	jumpSound.setBuffer(jumpBuffer);
-	
-	hitBuffer.loadFromFile("Assets/Audio/death.wav");
-	hitSound.setBuffer(jumpBuffer);
-	
-	itemBuffer.loadFromFile("Assets/Audio/pickup.wav");
-	itemSound.setBuffer(jumpBuffer);
-	
 
-	//hitSound.play();
-	//itemSound.play();
 }
 
 void Player::Update(sf::Time frameTime)
 {
-	
+
 	AnimatingObject::Update(frameTime);
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && canJump == true)
 	{
 		Jump(frameTime);
-		//jumpSound.play();
+		jumpSound.play();
 		canJump = false;
 	}
-	
+
 
 	velocity.y += gravity * frameTime.asSeconds();
 	
-	
-	
-
-	
 }
+
 
 void Player::Jump(sf::Time frameTime)
 {
-	velocity.y = JUMP_SPEED;
-
-	Play("jump");
 	
+	velocity.y = JUMP_SPEED;
 }
 
 void Player::Crouch()
 {
+	hasPressedDown = true;
+	Play("crouchRun");
+	
 }
 
 void Player::SetCanJump(bool newCanJump)
 {
 	canJump = newCanJump;
+}
+
+sf::FloatRect Player::GetCollider()
+{
+	collider = sprite.getGlobalBounds();
+
+	
+
+	// if jump modify colliders origin by going down and height of collider 
+	if (hasPressedDown == true)
+	{
+		
+		collider.top = sprite.getPosition().y;
+		collider.height = sprite.getGlobalBounds().height /2;
+
+	}
+	
+
+	return collider;
 }
 
 

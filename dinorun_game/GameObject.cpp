@@ -31,9 +31,13 @@ void GameObject::SetVelocity(sf::Vector2f newVelocity)
 	velocity = newVelocity;
 }
 
+
+
 sf::FloatRect GameObject::GetCollider()
 {
+	
 	collider = sprite.getGlobalBounds();
+
 
 	return collider;
 }

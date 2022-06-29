@@ -14,7 +14,7 @@ public:
 	void Jump(sf::Time frameTime);
 	void Crouch();
 	void SetCanJump(bool newCanJump);
-	
+	virtual sf::FloatRect GetCollider();
 
 private:
 	
@@ -26,14 +26,11 @@ private:
 	static sf::Texture* playerCrouch2;
 	int score;
 	sf::SoundBuffer jumpBuffer;
-	sf::SoundBuffer hitBuffer;
-	sf::SoundBuffer itemBuffer;
 	sf::Sound jumpSound;
-	sf::Sound hitSound;
-	sf::Sound itemSound;
 	sf::Vector2f screenSize;
 	int JUMP_SPEED;
 	bool canJump;
+	bool hasPressedDown;
 	
 	
 

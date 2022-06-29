@@ -7,7 +7,7 @@ Cactus::Cactus(sf::Vector2f newScreenSize)
 	, screenSize(newScreenSize)
 	, newPosition(0, 0)
 	, currentPosition(0, 0)
-	, velocity(-1000.0f, 0.0f)
+	, velocity(-500.0f, 0.0f)
 	, cactusFrequency(0.75f)
 	, timeSinceCactus()
 {
@@ -20,9 +20,9 @@ Cactus::Cactus(sf::Vector2f newScreenSize)
 	sprite.setTexture(*cactusTexture);
 	sprite.setOrigin(spriteTexture.getSize().x / 2, spriteTexture.getSize().y);
 
+	/*rand();
 	rand();
-	rand();
-	rand();
+	rand();*/
 	newPosition.x = screenSize.x + 10;
 	newPosition.y = (screenSize.y - (screenSize.y / 4) - 90);
 	ChangePos(newPosition);

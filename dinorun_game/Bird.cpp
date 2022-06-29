@@ -7,7 +7,7 @@ Bird::Bird(sf::Vector2f newScreenSize)
 	, screenSize(newScreenSize)
 	, newPosition(0, 0)
 	, currentPosition(0, 0)
-	, velocity(-1000.0f, 0.0f)
+	, velocity(-500.0f, 0.0f)
 	, birdFrequency(0.75f)
 	, timeSinceBird()
 {
@@ -23,7 +23,8 @@ Bird::Bird(sf::Vector2f newScreenSize)
 	rand();
 	rand();
 	rand();
-	newPosition.x = rand() % (int)screenSize.x;
+	newPosition.x = screenSize.x;
+	newPosition.y = 500;
 
 	ChangePos(newPosition);
 
