@@ -13,6 +13,7 @@ Animation::Animation()
 
 void Animation::AddFrame(sf::Texture* newFrame)	
 {
+	// adds new frame
 	if (newFrame)
 	{
 		frames.push_back(newFrame);
@@ -41,6 +42,7 @@ bool Animation::GetPlaying()
 
 void Animation::Update(sf::Time frameTime)
 {
+	// Cycles through all frames of the animation frame by frame until told otherwise
 	if (playing)
 	{
 
@@ -79,6 +81,7 @@ void Animation::Play()
 {
 	playing = true;
 
+	// Sets sprite's texture to current frame of animation
 	if (sprite)
 	{
 		sprite->setTexture(*frames[currentFrame]);
@@ -91,7 +94,8 @@ void Animation::Pause()
 }
 
 void Animation::Stop()
-{
+{ 
+	// Stops animation at current frame
 	playing = false;
 	currentFrame = 0;
 

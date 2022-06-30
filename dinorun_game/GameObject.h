@@ -10,6 +10,7 @@ public:
 	void Draw(sf::RenderTarget& target);
 	void ChangePos(sf::Vector2f newPos);
 	void SetVelocity(sf::Vector2f newVel);
+	void SetSpeed(float newSpeed);
 
 	virtual sf::FloatRect GetCollider();
 

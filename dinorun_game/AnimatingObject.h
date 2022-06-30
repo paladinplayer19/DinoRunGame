@@ -17,12 +17,10 @@ public:
 private:
 	std::map<std::string, Animation> animations;
 	Animation* currentAnimation;
+
 protected:
 	
-	//sf::Sprite sprite;
 	sf::Texture spriteTexture;
 	float speed;
-	/*sf::Vector2f position;
-	sf::FloatRect collider;*/
 };
 

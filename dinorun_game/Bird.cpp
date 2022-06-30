@@ -8,27 +8,29 @@ Bird::Bird(sf::Vector2f newScreenSize)
 	, newPosition(0, 0)
 	, currentPosition(0, 0)
 	, velocity(-500.0f, 0.0f)
-	, birdFrequency(0.75f)
+	, birdFrequency(3.0f)
 	, timeSinceBird()
 {
+	//loads texture
 	if (birdTexture == nullptr)
 	{
 		birdTexture = new sf::Texture();
 		birdTexture->loadFromFile("Assets/Graphics/flyer-2.png");
 	}
 
+	// sets texture
 	sprite.setTexture(*birdTexture);
 	
 
 	rand();
 	rand();
 	rand();
-	newPosition.x = screenSize.x;
-	newPosition.y = 500;
+
+	// sets up position of cactus 
+	newPosition.x = screenSize.x + rand() % (int)screenSize.x + 10;
+	newPosition.y = 450;
 
 	ChangePos(newPosition);
-
-	SetVelocity(velocity);
 
 }
 
@@ -36,13 +38,15 @@ void Bird::Update(sf::Time deltaTime)
 {
 	Obstacle::Update(deltaTime);
 
+	// gets current position of bird
 	sf::Vector2f birdPosition = GetPosition();
 
+	// checks to see if bird is off screen
 	if (birdPosition.x + birdTexture->getSize().x <= 0)
 	{
 
 		timeSinceBird += deltaTime;
-
+		// resets bird after time is up
 		if (timeSinceBird.asSeconds() >= birdFrequency)
 		{
 			Reset();
@@ -56,8 +60,9 @@ void Bird::Update(sf::Time deltaTime)
 
 void Bird::Reset()
 {
-	newPosition.x = screenSize.x;
-	newPosition.y = 500;
+	// resets bird off screen to the right
+	newPosition.x = screenSize.x + rand() % (int)screenSize.x + 10;
+	newPosition.y = 475;
 	currentPosition.x = newPosition.x;
 	currentPosition.y = newPosition.y;
 	ChangePos(currentPosition);

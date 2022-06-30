@@ -19,11 +19,11 @@ public:
 private:
 	
 
-	float gravity;
 	static sf::Texture* playerRunning1;
 	static sf::Texture* playerRunning2;
 	static sf::Texture* playerCrouch1;
 	static sf::Texture* playerCrouch2;
+	float gravity;
 	int score;
 	sf::SoundBuffer jumpBuffer;
 	sf::Sound jumpSound;
@@ -31,6 +31,7 @@ private:
 	int JUMP_SPEED;
 	bool canJump;
 	bool hasPressedDown;
+	sf::FloatRect orginalCollider;
 	
 	
 

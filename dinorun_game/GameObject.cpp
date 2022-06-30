@@ -3,32 +3,40 @@
 
 GameObject::GameObject()
 	: sprite()
-	, speed(10)
+	, speed(1)
 	, position(0,0)
-	, collider()
 	, velocity(0,0)
+	, collider()
 {
 }
 
 void GameObject::Update(sf::Time frameTime)
 {
+	
 	ChangePos(position + velocity * frameTime.asSeconds());
 }
 
 void GameObject::Draw(sf::RenderTarget& target)
 {
+	// draws sprite
 	target.draw(sprite);
 }
 
 void GameObject::ChangePos(sf::Vector2f newPosition)
 {
+	
 	position = newPosition;
 	sprite.setPosition(position);
 }
 
 void GameObject::SetVelocity(sf::Vector2f newVelocity)
 {
-	velocity = newVelocity;
+	velocity =  newVelocity;
+}
+
+void GameObject::SetSpeed(float newSpeed)
+{
+	speed = newSpeed;
 }
 
 
@@ -49,6 +57,7 @@ sf::Vector2f GameObject::GetPosition()
 
 bool GameObject::IsColliding(GameObject& other)
 {
+	// checks for collision
 	sf::FloatRect myCollider = GetCollider();
 	sf::FloatRect otherCollider = other.GetCollider();
 
@@ -57,7 +66,7 @@ bool GameObject::IsColliding(GameObject& other)
 
 sf::Vector2f GameObject::GetCollisionDepth(GameObject& other)
 {
-
+	// gets depth of overlap between 2 colliders
 	sf::FloatRect myCollider = GetCollider();
 	sf::FloatRect otherCollider = other.GetCollider();
 

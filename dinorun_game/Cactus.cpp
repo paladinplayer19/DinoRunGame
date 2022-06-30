@@ -8,39 +8,46 @@ Cactus::Cactus(sf::Vector2f newScreenSize)
 	, newPosition(0, 0)
 	, currentPosition(0, 0)
 	, velocity(-500.0f, 0.0f)
-	, cactusFrequency(0.75f)
+	, cactusFrequency(3.0f)
 	, timeSinceCactus()
 {
+	// loads texture
 	if (cactusTexture == nullptr)
 	{
 		cactusTexture = new sf::Texture();
 		cactusTexture->loadFromFile("Assets/Graphics/cactus.png");
 	}
 
+	// sets texture
 	sprite.setTexture(*cactusTexture);
 	sprite.setOrigin(spriteTexture.getSize().x / 2, spriteTexture.getSize().y);
 
-	/*rand();
 	rand();
-	rand();*/
-	newPosition.x = screenSize.x + 10;
+	rand();
+	rand();
+
+	// sets up position of cactus 
+	newPosition.x = screenSize.x + rand() % (int)screenSize.x + 50;
 	newPosition.y = (screenSize.y - (screenSize.y / 4) - 90);
 	ChangePos(newPosition);
 
-	SetVelocity(velocity);
+	
 }
 
 void Cactus::Update(sf::Time deltaTime)
 {
 	Obstacle::Update(deltaTime);
 
+	// gets current position of cactus
 	sf::Vector2f cactusPosition = GetPosition();
 
+	// checks to see if cactus is off screen
 	if (cactusPosition.x + cactusTexture->getSize().x <= 0)
 	{
 
 		timeSinceCactus += deltaTime;
 
+		// resets cactus after time is up
 		if (timeSinceCactus.asSeconds() >= cactusFrequency)
 		{
 			Reset();
@@ -50,10 +57,12 @@ void Cactus::Update(sf::Time deltaTime)
 
 	}
 
+
 }
 
 void Cactus::Reset()
 {
+	// resets cactus off screen to the right
 	newPosition.x = screenSize.x + 10;
 	newPosition.y = (screenSize.y - (screenSize.y / 4) - 90);
 	currentPosition.x = newPosition.x;

@@ -6,9 +6,9 @@ public:
 	Bird(sf::Vector2f newScreenSize);
 	virtual void Update(sf::Time deltaTime) override;
 
+	void Reset();
 
 private:
-	void Reset();
 
 	sf::Vector2f screenSize;
 	static sf::Texture* birdTexture;

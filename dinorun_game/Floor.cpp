@@ -5,17 +5,18 @@ sf::Texture* Floor::floorTexture = nullptr;
 Floor::Floor(sf::Vector2f newScreenSize)
 	: GameObject()
 	, screenSize(newScreenSize)
-	, canJump()
-	, isTouching()
+	, canJump(true)
+	, isTouching(false)
 	
 {
+	// load texture
 	if (floorTexture == nullptr)
 	{
 		floorTexture = new sf::Texture();
 		floorTexture->loadFromFile("Assets/Graphics/floor.png");
 	}
 	
-	
+	//set texture
 	sprite.setTexture(*floorTexture);
 	
 	
@@ -34,9 +35,11 @@ void Floor::HandleCollision(GameObject& other)
 	// Checking if the thing is actually the player
 	Player* checkPlayer = dynamic_cast<Player*>(&other);
 
+	// checks if checkPlayer has something in it
 	if (checkPlayer == nullptr) {
 		return;
 	}
+	// checks if there is collision
 
 	if (!IsColliding(other))
 	{
@@ -51,7 +54,7 @@ void Floor::HandleCollision(GameObject& other)
 	sf::Vector2f playerPosition = checkPlayer->GetPosition();
 
 	
-		
+	// blocks player from falling any further if they collide
 	if (isTouching)
 	{
       playerPosition.y -= absDepth.y;

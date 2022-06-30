@@ -26,15 +26,18 @@ private:
 	Floor floor;
 	Player player;
 	Meat meat;
+	sf::RenderWindow window;
 	std::vector<Bird*> birdVector;
 	std::vector<Cactus*> cactusVector;
-	sf::RenderWindow window;
-	bool hasCollided;
 	std::vector<Cloud*> cloudVector;
 	int score;
 	sf::FloatRect quitCollider;
 	sf::FloatRect resetCollider;
 	sf::Vector2f mousePos;
+	sf::Texture quitButtonTexture;
+	sf::Texture resetButtonTexture;
+	sf::Sprite resetButton;
+	sf::Sprite quitButton;
 	sf::Sound backgroundMusic;
 	sf::SoundBuffer backgroundMusicBuffer;
 	sf::Vector2f collidetestSize;
@@ -47,6 +50,9 @@ private:
 	float timePassed;
 	float speedCount;
 	bool isGameOver;
+	sf::Text gameOverText;
+	
+
 
 
 };

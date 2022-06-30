@@ -7,10 +7,9 @@ public:
 
 	virtual void Update(sf::Time deltaTime) override;
 
-private:
-
 	void Reset();
 
+private:
 
 	static sf::Texture* cloudTexture;
 	sf::Vector2f screenSize;

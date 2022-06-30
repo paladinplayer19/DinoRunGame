@@ -11,9 +11,10 @@ public:
 	bool GetIsTouching();
 	bool GetIsAlive();
 
+	void Reset();
+
 private:
 
-	void Reset();
 
 
 	static sf::Texture* meatTexture;

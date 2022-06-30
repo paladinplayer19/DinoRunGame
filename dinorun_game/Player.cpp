@@ -14,12 +14,15 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	, jumpBuffer()
 	, jumpSound()
 	, screenSize(newScreenSize)
-	, JUMP_SPEED(-800)
-	, canJump()
+	, JUMP_SPEED(-810)
+	, canJump(false)
 	, hasPressedDown(false)
+	, orginalCollider()
 {
+	// Set position
 	ChangePos(sf::Vector2f(100, 100.0f));
 
+	// Load animation frames
 	if (playerRunning1 == nullptr)
 	{
 		playerRunning1 = new sf::Texture();
@@ -43,7 +46,7 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 
 
 
-
+	// Setup animations
 	Animation* run = CreateAnimation("run");
 	Animation* crouchRun = CreateAnimation("crouchRun");
 
@@ -60,9 +63,13 @@ Player::Player(Game* newGame, sf::Vector2f newScreenSize)
 	crouchRun->SetLoop(false);
 
 
-
+	
 	Play("run");
 
+	// gets non modified collider
+	orginalCollider = collider;
+
+	// Loads jump sound
 	jumpBuffer.loadFromFile("Assets/Audio/jump.wav");
 	jumpSound.setBuffer(jumpBuffer);
 
@@ -73,7 +80,7 @@ void Player::Update(sf::Time frameTime)
 
 	AnimatingObject::Update(frameTime);
 
-
+	// Allows the player to jump and play the corresponding audio 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && canJump == true)
 	{
 		Jump(frameTime);
@@ -81,7 +88,7 @@ void Player::Update(sf::Time frameTime)
 		canJump = false;
 	}
 
-
+	// Applies gravity
 	velocity.y += gravity * frameTime.asSeconds();
 	
 }
@@ -90,7 +97,10 @@ void Player::Update(sf::Time frameTime)
 void Player::Jump(sf::Time frameTime)
 {
 	
+	hasPressedDown = false;
 	velocity.y = JUMP_SPEED;
+	Play("run");
+	
 }
 
 void Player::Crouch()
@@ -111,7 +121,7 @@ sf::FloatRect Player::GetCollider()
 
 	
 
-	// if jump modify colliders origin by going down and height of collider 
+	// Modify collider if in crouch mode
 	if (hasPressedDown == true)
 	{
 		
@@ -119,8 +129,12 @@ sf::FloatRect Player::GetCollider()
 		collider.height = sprite.getGlobalBounds().height /2;
 
 	}
-	
+	else
+	{
+		collider = sprite.getGlobalBounds();
+	}
 
+	
 	return collider;
 }
 
